@@ -1,0 +1,46 @@
+# Submit a job using condor
+
+universe = docker
+docker_image = registry.cvib.ucla.edu/{{username}}:condor-quick-start
+
+executable = run.sh # script or program to run job
+should_transfer_files = YES
+transfer_input_files = run.sh
+
+## requirements: specify which machine(s) to use in CVIB ##
+#requirements = (OpSys == "LINUX" && Arch == "X86_64")
+#requirements = (Target.CUDADriverVersion >= 10.1 && OpSys == "LINUX" && Arch == "X86_64")
+#requirements = (Target.CUDADriverVersion >= 10.1) && ((Machine  == "REDLRADADM23710.ad.medctr.ucla.edu") || (Machine  == "REDWRADMMC23199.ad.medctr.ucla.edu") || (Machine  == "REDLRADADM23621.ad.medctr.ucla.edu") || (Machine  == "REDLRADADM23620.ad.medctr.ucla.edu") || (Machine  == "REDLRADADM23712.ad.medctr.ucla.edu") || (Machine  == "redlradbei05920.ad.medctr.ucla.edu") || (Machine  == "REDLRADADM23713.ad.medctr.ucla.edu") || (Machine  == "REDLRADADM23589.ad.medctr.ucla.edu"))
+requirements = (Machine  == "REDLRADADM23589.ad.medctr.ucla.edu")
+
+when_to_transfer_output = ON_EXIT
+
+## Meta data ##
+
+#output = log/job.out
+#error = log/job.err
+#log = log/job.log
+
+## Use $(process) for Numbered files ##
+output = log/job.$(cluster).$(process).out
+error = log/job.$(cluster).$(process).err
+log = log/job.$(cluster).$(process).log
+# prior to submitting jobs, if you specified a log folder in the submit script,
+# then make sure you create the folder first, or job will forever be at idle
+
+## Requesting resources ##
+# Requesting too little: causes problems for $USER other jobs and might be put on hold by condor
+# Requesting too much: jobs will match to fewer slots than they could, may block other jobs
+
+# select number of cpus/gpus for job
+request_cpus = 1
+request_gpus = 1
+
+# select some memory and disk space
+#request_memory = 1GB
+#request_disk = 500MB
+
+#concurrency_limits = limit10
+
+arguments = "hello world" # any options passed to the executable from the command line
+queue

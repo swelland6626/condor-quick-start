@@ -1,0 +1,34 @@
+Notes for condor and docker documentation project.
+
+Authors: Spencer Welland and Dallas Tada.
+
+qia issue: 85-condor-quick-start-guide
+
+> Path in build directory for welcome page is index.rst
+	- ex: /cvib/apps/personal/.../build/html/...
+
+	- /build/html will contain html files built from .rst files in /source.
+
+> index/rst
+	- Contents
+		~ Overview of condor and docker in CVIB
+
+	- Condor --> Dallas
+		~ See commands at: http://qia.pages.cvib.ucla.edu/qia/ga/ga_condor.html?highlight=condor
+		~ See Wasil and HTCondor documentation for other commands to include
+
+	- Docker --> Spencer
+		~ See: https://gitlab.cvib.ucla.edu/workshop/hello-condor
+		~ Downloading existing docker image from the docker repo (e.g preset tensorflow docker)
+		~ Creating docker image
+		~ What goes into docker file
+		~ Building docker
+		~ Docker run command, including mounting drives
+		~ Uploading docker image to CVIB registry
+		~ Specifying docker in condor submit file
+
+		~ Use Pangyu's Quick-start Docker as a base for explaining how to integrate a model into Docker quickly and using it in CVIB.
+
+	- Quick-start example --> Spencer and Dallas
+		~ Use your example (and Pangyu's resources) for a quick-start example of TF Docker + Condor submission.
+
