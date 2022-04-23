@@ -10,10 +10,10 @@ docker run -it --rm --name $docker_name -v /cvib2/apps/personal/wasil/lib:/medqi
 ```
 
 Change docs_root to appropriate directory (working directory for building documentation)
-'''
+```
 export docs_root=/cvib2/apps/personal/dtada/lib/condor-quick-start/doc
 cd $docs_root
-'''
+```
 
 Build html file
 ```
