@@ -78,4 +78,6 @@ Basic Commands
 
         condor_submit
 
+        condor_q --better-analyze
+
          
