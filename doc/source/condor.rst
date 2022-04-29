@@ -4,33 +4,38 @@
 Using Condor
 ######################################
 
+HTCondor (Condor) provides tasks to a queue and manages tasks by scheduling them to run on computers. These tasks are referred to as
+jobs. Condor assigns units for individual machines called slots, in which a single or multiple jobs are assigned to.
+Condor will dynamically create and organize new slots as resources become available for new jobs. To a submit a job using Condor, 
+a file that contains commands to run jobs is needed.
+
 ******************************************************
 Condor Submit File
 ******************************************************
 
 Main parameters in a ``submit.condor`` file:
 
-1. ``universe``: specify which HTCondor universe to use when running the job.
+* ``universe``: specify which HTCondor universe to use when running the job.
 
-2. ``executable``: the script or program to run that becomes the job.
+* ``executable``: the script or program to run that becomes the job.
 
-3. ``arguments``: list of arguments to be supplied to the executable as part of the command line.
+* ``arguments``: list of arguments to be supplied to the executable as part of the command line.
 
-4. ``requirements``: request resources (i.e. Machine(s)) needed to process job.
+* ``requirements``: request resources (i.e. Machine(s)) needed to process job.
 
-5. ``log``: creates a job event file.
+* ``log``: creates a job event file.
 
-6. ``output``: creates standard output file. 
+* ``output``: creates standard output file. 
 
-7. ``error``: creates standard error file that captures any error messages. 
+* ``error``: creates standard error file that captures any error messages. 
 
-8. ``tranfer_input_files``: list of all files/directories to be transferred into the working directory for the job.
+* ``tranfer_input_files``: list of all files/directories to be transferred into the working directory for the job.
 
-9. ``request_cpus``, ``request_gpus``, ``request_memory``, ``request_disk``: requests needed CPU, GPU, memory and disk space for job.
+* ``request_cpus``, ``request_gpus``, ``request_memory``, ``request_disk``: requests needed CPU, GPU, memory and disk space for job.
    If the requested resources are insufficient for the job, it may cause problems for the user and jobs might be put on hold by condor.
    If the requested resources are much greater than needed, jobs will match to fewer slots than they could and may block other jobs.
 
-10. ``queue``: specify the amount of times to repeat job submission for a set of arguments (defaults to 1).
+* ``queue``: specify the amount of times to repeat job submission for a set of arguments (defaults to 1).
 
 An example of a ``submit.condor`` file:
 
@@ -64,20 +69,57 @@ An example of a ``submit.condor`` file:
         arguments = "hello world"
         queue
 
+Refer to the example_ section of the documentation to use a Condor submit file for training a CNN.
+
 ******************************************************
 Basic Commands
 ******************************************************
 
     .. code-block:: bash
+        #submits job(s)
+        condor_submit <submit.condor file>
 
+        # monitor submitted jobs
         condor_q
 
+        # lits individual job details
+        condor_q -nobatch
+
+        # check detailed status
+        # useful for diagnosing why jobs are idle
         condor_q -analyze
-
-        condor_status
-
-        condor_submit
-
         condor_q --better-analyze
 
+        # display status of Condor pool
+        condor_status
+
+******************************************************
+Resolving Issues
+******************************************************
          
+Condor may experience Logistical errors and must *hold* a job so that it can be fixed by the user. 
+
+A job on hold is interupted but remains in queue on *"H"* state until it is removed or fixed and released.
+Common hold reasons include:
+
+* Job cannot be matched with a machine
+* Incorrect path to fields that need to be transferred
+* Poorly formatted executables
+* Job uses more memory or disk than requested (in condor_submit file)
+* Job runs longer than allowed (72-hour default in CHTC pool)
+* Admin has to put job on hold
+
+Refer to the job log, error and output files for troubleshooting details.
+
+There are a couple ways to view log file for the reason of the held job:
+
+    .. code-block:: bash
+            condor_q -hold <Job.ID>
+            condor_q -hold -af HoldReason
+
+If the issue requires a resubmission, it can be removed from the queue by:
+
+    .. code-block:: bash
+        condor_rm <Job.ID>       # removes job by Job ID
+        condor_rm <Cluster.ID>   # removes job by Cluster ID
+        condor_rm <Username>     # removes job by username

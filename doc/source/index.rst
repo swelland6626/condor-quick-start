@@ -16,6 +16,7 @@ This documentation serves as a guide for new users unfamiliar with HTCondor (Con
    overview
    condor
    docker
+   example
 
 Indices and tables
 ==================
