@@ -19,6 +19,7 @@ qia issue: 85-condor-quick-start-guide
 
 	- Docker --> Spencer
 		~ See: https://gitlab.cvib.ucla.edu/workshop/hello-condor
+		~ Basic description of docker and some basic Dockerfile instructions.
 		~ Downloading existing docker image from the docker repo (e.g preset tensorflow docker)
 		~ Creating docker image
 		~ What goes into docker file
