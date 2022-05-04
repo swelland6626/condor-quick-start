@@ -223,8 +223,10 @@ says something about the port already being allocated.
 * ``docker image ls``: lists all docker containers and their IDs
 * ``docker rmi -f container-id``: removes a running docker image
 * ``docker exec``: runs a command inside a a running container (similar to ``docker run``)
-* ``docker exec -it [container-id] bash```: enters an already running docker
+* ``docker exec -it [container-id] bash``: enters an already running docker
 
+
+When inside a container, ``exit`` or the keystroke ``ctrl+d`` will exit the docker. 
 
 Use a ``.dockerignore`` file to exclude files from the container build. Usage is 
 similar to a ``.gitignore`` file.

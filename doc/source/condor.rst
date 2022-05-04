@@ -1,7 +1,7 @@
 .. highlight:: shell
 
 ######################################
-Using Condor
+Condor
 ######################################
 
 HTCondor (Condor) provides tasks to a queue and manages tasks by scheduling them to run on computers. These tasks are referred to as
@@ -69,13 +69,15 @@ An example of a ``submit.condor`` file:
         arguments = "hello world"
         queue
 
-Refer to the example_ section of the documentation to use a Condor submit file for training a CNN.
+
+Refer to the :doc:`example <example>` section of the documentation to use a Condor submit file for training a CNN.
 
 ******************************************************
 Basic Commands
 ******************************************************
 
     .. code-block:: bash
+
         #submits job(s)
         condor_submit <submit.condor file>
 
@@ -114,12 +116,14 @@ Refer to the job log, error and output files for troubleshooting details.
 There are a couple ways to view log file for the reason of the held job:
 
     .. code-block:: bash
-            condor_q -hold <Job.ID>
-            condor_q -hold -af HoldReason
+
+        condor_q -hold <Job.ID>
+        condor_q -hold -af HoldReason
 
 If the issue requires a resubmission, it can be removed from the queue by:
 
     .. code-block:: bash
+
         condor_rm <Job.ID>       # removes job by Job ID
         condor_rm <Cluster.ID>   # removes job by Cluster ID
         condor_rm <Username>     # removes job by username

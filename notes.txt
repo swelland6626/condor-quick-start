@@ -32,4 +32,7 @@ qia issue: 85-condor-quick-start-guide
 
 	- Quick-start example --> Spencer and Dallas
 		~ Use your example (and Pangyu's resources) for a quick-start example of TF Docker + Condor submission.
+		
+		~ Use a public tensorflow image to launch the container from.
+			+ Use condor to submit a job that trains a basic cnn for mnist classification
 
