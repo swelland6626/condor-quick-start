@@ -141,22 +141,7 @@ Docker container must be built and launched. For CVIB, you will also want to pus
 container to the CVIB registry which is a private hub for saved/committed Docker images. 
 
 For practice, create a directory inside your personal directory called 'sandbox' , cd into it
-and make a new file, rewrite this simple example inside, and save it as 'Dockerfile' 
-(don't use any file extension).
-
-   .. code-block:: bash
-
-      FROM tensorflow/tensorflow:2.6.0-gpu-jupyter
-
-      RUN apt-get -yq update;apt-get install -yq vim wget
-      RUN pip3 install imageio==2.6.0
-
-      WORKDIR /opt
-      COPY hello.py .
-      COPY hello.sh .
-
-
-Create another file called "hello.py" and write the following code inside:
+and make a new file called "hello.py" and write the following code inside:
 
    .. code-block:: bash
 
@@ -185,6 +170,32 @@ Create another file saved as "hello.sh" and write the following code inside:
       wget $url -O image.png
       python hello.py image.png $outputpath
       cat $outputpath
+
+
+Create another file saved as requirements.txt and write the following code inside:
+
+   .. code-block:: bash
+
+      tensorflow
+      keras
+      numpy
+
+
+Create another file saved as 'Dockerfile' (don't use any file extension) and write the following code inside:
+
+   .. code-block:: bash
+
+      FROM tensorflow/tensorflow:2.6.0-gpu-jupyter
+
+      RUN apt-get -yq update;apt-get install -yq vim wget
+      RUN pip3 install imageio==2.6.0
+
+      WORKDIR /opt
+      COPY hello.py .
+      COPY hello.sh .
+
+      COPY requirements.txt .
+      RUN pip3 install -r requirements.txt
 
 
 Finally, run the following commands in a terminal to launch the container you made and test it out.

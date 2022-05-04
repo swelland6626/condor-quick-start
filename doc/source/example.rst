@@ -2,7 +2,7 @@
 Example
 ######################################
 
-Example showing how to use docker and condor tp submit a job.
+Example showing how to use docker and condor to submit a job.
 
 First, you need to build a docker image and put it in the CVIB registry.
 
@@ -29,6 +29,9 @@ Now you need to make a condor submit file.
     .. code-block:: bash
 
         # condor submit file here
+        # path to example in git: /condor-quick-start/docker_example/mnist_ex.py
+
+        # path in condor submit file needs to be /sandbox/mnist_ex.py
 
 
 The docker image has been built and now you can launch a container and submit the job.
@@ -43,4 +46,5 @@ The docker image has been built and now you can launch a container and submit th
 
 
 You can exit the docker container and use ``condor_q`` to view the status of the job. You can also view the resource the job is using by 
-going `here <http://radcondor.cvib.ucla.edu:48109/>`_ and finding your username.
+going `here <http://radcondor.cvib.ucla.edu:48109/>`_ and finding your username (this model doesn't actually use a GPU but normally this is how you view resource usage). 
+Finally, use ``ctrl+d`` or ``exit`` to exit the docker container.
