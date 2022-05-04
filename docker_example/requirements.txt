@@ -1,0 +1,15 @@
+jupyterlab
+scikit-learn
+seaborn
+opentsne
+SimpleITK
+scikit-image
+scipy
+pydicom
+albumentations
+tensorflow-addons
+tqdm
+tensorflow_datasets
+tensorflow
+keras
+numpy
